@@ -4,28 +4,27 @@ using namespace std;
 int main()
 {
     string x = {""};
+    Calculator c;
     cout << "Hello World!\n";
     cout << "What's your name?" << endl;
     cin >> x;
-    cout << "the name you entered is: " << x;
+    cout << "the name you entered is: " << x << endl;
+
+    int z;
+    int y;
+    cout << "What are the two numbers you would like to add?" << endl;
+    cin >> z;
+
+    cout << "The number you have chosen first is :" << z << endl;
+    cout << "What will be your second number?" << endl;
+
+    cin >> y;
 
 
-    double x = 0.0;
-    double y = 0.0;
-    double result = 0.0;
-    char oper = '+';
+    cout << "The 2 numbers you chose to add are " << z << " and " << y << endl;
 
-    cout << "Calculator Console Application" << endl << endl;
-    cout << "Please enter the operation to perform. Format: a+b | a-b | a*b | a/b"
-        << endl;
-
-    Calculator c;
-    while (true)
-    {
-        cin >> x >> oper >> y;
-        result = c.Calculate(x, oper, y);
-        cout << "Result " << "of " << x << oper << y << " is: " << result << endl;
-    }
+    int w = c.AddInt(z, y);
+    cout << "after calculating your numbers, your result is: " << w;
 
     return 0;
 }
