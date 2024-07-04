@@ -1,30 +1,39 @@
 #include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <stdexcept>
 #include "Calculator.h"
 using namespace std;
 int main()
 {
     string x = {""};
     Calculator c;
-    cout << "Hello World!\n";
-    cout << "What's your name?" << endl;
-    cin >> x;
-    cout << "the name you entered is: " << x << endl;
 
-    int z;
-    int y;
-    cout << "What are the two numbers you would like to add?" << endl;
-    cin >> z;
+    vector<string> userOptions;
 
-    cout << "The number you have chosen first is :" << z << endl;
-    cout << "What will be your second number?" << endl;
+    userOptions.push_back("Addition");
+    userOptions.push_back("Subtraction");
+    userOptions.push_back("Division");
+    userOptions.push_back("Multiplication");
+    
+    cout << "Welcome to the calculator. I am your mathematical wizard. What can I help you with? Type a number that corresponds with the operation you want to use." << endl;
 
-    cin >> y;
+    for (const auto& option : userOptions) {
+        std::cout << option << std::endl;
+    }
+
+    std::getline(std::cin, x);
+
+    cout << "You chose " << x << " as an option." << endl;
 
 
-    cout << "The 2 numbers you chose to add are " << z << " and " << y << endl;
+    std::string z;
+    std::cout << "Enter a number you would like to use in this operation";
+    std::getline(std::cin, z);
 
-    int w = c.AddInt(z, y);
-    cout << "after calculating your numbers, your result is: " << w;
+    std::cout << "The number you have chosen is " << z << "!\n";
+
 
     return 0;
 }
