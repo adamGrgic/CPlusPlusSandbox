@@ -6,28 +6,6 @@
 #include "Calculator.h"
 using namespace std;
 
-//double applyOperator(double a, double b, const std::string& op) {
-//    if (op == "+") {
-//        return a + b;
-//    }
-//    else if (op == "-") {
-//        return a - b;
-//    }
-//    else if (op == "*") {
-//        return a * b;
-//    }
-//    else if (op == "/") {
-//        if (b != 0) {
-//            return a / b;
-//        }
-//        else {
-//            throw std::invalid_argument("Division by zero");
-//        }
-//    }
-//    else {
-//        throw std::invalid_argument("Invalid operator");
-//    }
-//}
 
 string calculateValue(string mathOperator, int value1, int value2) {
     
@@ -55,6 +33,82 @@ string calculateValue(string mathOperator, int value1, int value2) {
         return "operator " + mathOperator + " did not match any of our accepted values. Please fix this.";
     }
 
+
+}
+
+
+
+void calculateInput() {
+    string z;
+    cin >> z;
+    vector<char> inputEval(z.begin(), z.end());
+    string tmpNumString{};
+    string currentCalculation{ "0" };
+    char _operator{ 0 };
+
+
+    for (int i = 0; i <= inputEval.size() - 1; i++) {
+        cout << "parsed char: " << inputEval[i] << endl;
+
+        if (isdigit(inputEval[i]))
+        {
+            if (_operator == 0)
+            {
+                currentCalculation = inputEval[i];
+                _operator = 'z';
+            }
+
+            else if (_operator != 'z') {
+                if (inputEval.size() - 1 != i) {
+                    if (isdigit(inputEval[i + 1])) {
+                        tmpNumString += inputEval[i];
+                    }
+
+                    else {
+                        tmpNumString += inputEval[i];
+                        currentCalculation = calculateValue(string(1, _operator), stoi(currentCalculation), stoi(tmpNumString));
+                        _operator = 'z';
+                        tmpNumString = "";
+                    }
+                }
+                else {
+                    tmpNumString += inputEval[i];
+                    currentCalculation = calculateValue(string(1, _operator), stoi(currentCalculation), stoi(tmpNumString));
+                    _operator = 'z';
+                    tmpNumString = "";
+                }
+
+
+            }
+            else {
+                tmpNumString += inputEval[i];
+                // need to figure out what to do when there's no operator selected 
+            }
+            /*if (i == inputEval.size() -1)
+            {
+                cout << "final iteration" << endl;
+                currentCalculation = calculateValue(string(1, inputEval[i]), stoi(currentCalculation), stoi(tmpNumString));
+            }*/
+        }
+
+        else if (inputEval[i] == '+' || inputEval[i] == '-' || inputEval[i] == '*' || inputEval[i] == '/' || inputEval[i] == '%' && tmpNumString.size() > 0)
+        {
+            _operator = inputEval[i];
+            /*currentCalculation = calculateValue(string(1, inputEval[i]), stoi(currentCalculation), stoi(tmpNumString));*/
+            /*tmpNumString = "";*/
+        }
+
+
+    }
+
+    cout << "Your calculation is: " << currentCalculation << endl;
+}
+
+void initializeCalculator() {
+
+    cout << "Please enter an expression to calculate." << endl;
+    calculateInput();
+    initializeCalculator();
 
 }
 
@@ -117,7 +171,7 @@ int main()
     string z;
     
     cout << "Welcome to the C++ Calculator!" << endl;
-    cout << "Please enter your calculation: " << endl;
+    /*cout << "Please enter your calculation: " << endl;*/
 
     //char t = '5';
 
@@ -130,51 +184,78 @@ int main()
     //}
 
     
-    cin >> z;
-    vector<char> inputEval(z.begin(), z.end());
+    //cin >> z;
+    //vector<char> inputEval(z.begin(), z.end());
 
 
-    // parse user input
+    //// parse user input
 
-    // split string into char(s)
+    //// split string into char(s)
 
-    string tmpNumString{};
-    string currentCalculation{ "0" };
-    char _operator{'z'};
-    
+    //string tmpNumString{};
+    //string currentCalculation{ "0" };
+    //char _operator{0};
+    //
 
-    for (int i = 0; i <= inputEval.size() -1; i++) {
-        cout << "parsed char: " << inputEval[i] << endl;
+    //for (int i = 0; i <= inputEval.size() -1; i++) {
+    //    cout << "parsed char: " << inputEval[i] << endl;
 
-        if (isdigit(inputEval[i]))
-        {
-            if (_operator != 'z') {
-                currentCalculation = calculateValue(string(1, _operator), stoi(currentCalculation), stoi(tmpNumString));
-                _operator = 'z';
+    //    if (isdigit(inputEval[i]))
+    //    {
+    //        if (_operator == 0)
+    //        {
+    //            currentCalculation = inputEval[i];
+    //            _operator = 'z';
+    //        }
 
-            }
-            else {
-                tmpNumString += inputEval[i];
-                if 
-            }
-            /*if (i == inputEval.size() -1)
-            {
-                cout << "final iteration" << endl;
-                currentCalculation = calculateValue(string(1, inputEval[i]), stoi(currentCalculation), stoi(tmpNumString));
-            }*/
-        }
+    //        else if (_operator != 'z') {
+    //            if (inputEval.size() - 1 != i) {
+    //                if (isdigit(inputEval[i + 1])) {
+    //                    tmpNumString += inputEval[i];
+    //                }
 
-        else if (inputEval[i] == '+' || inputEval[i] == '-' || inputEval[i] == '*' || inputEval[i] == '/' || inputEval[i] == '%' && tmpNumString.size() > 0)
-        {
-            _operator = inputEval[i];
-            /*currentCalculation = calculateValue(string(1, inputEval[i]), stoi(currentCalculation), stoi(tmpNumString));*/
-            /*tmpNumString = "";*/
-        }
+    //                else {
+    //                    tmpNumString += inputEval[i];
+    //                    currentCalculation = calculateValue(string(1, _operator), stoi(currentCalculation), stoi(tmpNumString));
+    //                    _operator = 'z';
+    //                    tmpNumString = "";
+    //                }
+    //            }
+    //            else {
+    //                tmpNumString += inputEval[i];
+    //                currentCalculation = calculateValue(string(1, _operator), stoi(currentCalculation), stoi(tmpNumString));
+    //                _operator = 'z';
+    //                tmpNumString = "";
+    //            }
+    //            
+    //            
+    //        }
+    //        else {
+    //            tmpNumString += inputEval[i];
+    //            // need to figure out what to do when there's no operator selected 
+    //        }
+    //        /*if (i == inputEval.size() -1)
+    //        {
+    //            cout << "final iteration" << endl;
+    //            currentCalculation = calculateValue(string(1, inputEval[i]), stoi(currentCalculation), stoi(tmpNumString));
+    //        }*/
+    //    }
+
+    //    else if (inputEval[i] == '+' || inputEval[i] == '-' || inputEval[i] == '*' || inputEval[i] == '/' || inputEval[i] == '%' && tmpNumString.size() > 0)
+    //    {
+    //        _operator = inputEval[i];
+    //        /*currentCalculation = calculateValue(string(1, inputEval[i]), stoi(currentCalculation), stoi(tmpNumString));*/
+    //        /*tmpNumString = "";*/
+    //    }
 
 
-    }
+    //}
+    /*string calculation = calculateInput();
+    cout << "your calculation is: " << calculation << endl;*/
 
-    cout << "your calculation is: " << currentCalculation << endl;
+    initializeCalculator();
+
+
     /*int num = 12345;
 
     if (num == 0) {
