@@ -46,6 +46,53 @@ void calculateInput() {
     string currentCalculation{ "0" };
     char _operator{ 0 };
 
+    // ok now we need to consider how to handle order of operations (PEMDAS)
+    // find paranethesis
+    // if ( or ) found then extract the contents
+
+    // find exponents
+    // if found calculate those values
+
+    // ... etc
+
+
+    // create queue of operations? 
+    // | op1  |  op2  |  op3  |  op4  |
+    // => empty queue 
+    // 
+    // 
+
+    // maybe before the below content (starting at loop through expression), we should format the content inside to be easier to work with 
+    // split expression string into a vector<string>? 
+    // 1. find all numbers and make them complete (and then mark them as int, decimal, float, etc)  
+    // 2. 
+    // 
+    // expression queue
+    // => [  expr1  ][ operator ][ expr2 ]...
+    // [ item: { type: number...float, expression1 ( + ... *, "(" ), expression2 ")", etc; value: 5, 55.6, *, %, etc } 
+    // 
+    // 
+    // 
+    // loop through expression
+    // if we find ( , mark the index at which its found, then search for the closing )
+    // create a new operation in the queue
+    // operation: P, range: [x] to [y]
+    // => 1. check if theres another ( ) inside current ( ) 
+    // => if. if there is another ( ) , jump into that parenthesis and do things there
+    //       II. repeat this same method (recursion) to create order of operations for the content inside the parenthesis 
+    //         if. exponent is found (^ operator) 
+    //             => find the number before it and the number after it   
+    // => 1b. 
+    //      if there is none, move on to the next operation (e)
+    //      
+    // 
+    // => 2. 
+    // 
+    // 
+    // 
+    // => 
+    // 
+
 
     for (int i = 0; i <= inputEval.size() - 1; i++) {
         cout << "parsed char: " << inputEval[i] << endl;
@@ -171,91 +218,75 @@ int main()
     string z;
     
     cout << "Welcome to the C++ Calculator!" << endl;
-    /*cout << "Please enter your calculation: " << endl;*/
-
-    //char t = '5';
-
-    //if (isdigit(t)) {
-    //    int num = t - '0'; // Convert char to int
-    //    cout << "The character " << t << " can be converted to the integer " << num << endl;
-    //}
-    //else {
-    //    cout << "The character " << t << " cannot be converted to an integer." << endl;
-    //}
-
     
-    //cin >> z;
-    //vector<char> inputEval(z.begin(), z.end());
+
+    // keep
+    /*initializeCalculator();*/
 
 
-    //// parse user input
-
-    //// split string into char(s)
-
-    //string tmpNumString{};
-    //string currentCalculation{ "0" };
-    //char _operator{0};
-    //
-
-    //for (int i = 0; i <= inputEval.size() -1; i++) {
-    //    cout << "parsed char: " << inputEval[i] << endl;
-
-    //    if (isdigit(inputEval[i]))
-    //    {
-    //        if (_operator == 0)
-    //        {
-    //            currentCalculation = inputEval[i];
-    //            _operator = 'z';
-    //        }
-
-    //        else if (_operator != 'z') {
-    //            if (inputEval.size() - 1 != i) {
-    //                if (isdigit(inputEval[i + 1])) {
-    //                    tmpNumString += inputEval[i];
-    //                }
-
-    //                else {
-    //                    tmpNumString += inputEval[i];
-    //                    currentCalculation = calculateValue(string(1, _operator), stoi(currentCalculation), stoi(tmpNumString));
-    //                    _operator = 'z';
-    //                    tmpNumString = "";
-    //                }
-    //            }
-    //            else {
-    //                tmpNumString += inputEval[i];
-    //                currentCalculation = calculateValue(string(1, _operator), stoi(currentCalculation), stoi(tmpNumString));
-    //                _operator = 'z';
-    //                tmpNumString = "";
-    //            }
-    //            
-    //            
-    //        }
-    //        else {
-    //            tmpNumString += inputEval[i];
-    //            // need to figure out what to do when there's no operator selected 
-    //        }
-    //        /*if (i == inputEval.size() -1)
-    //        {
-    //            cout << "final iteration" << endl;
-    //            currentCalculation = calculateValue(string(1, inputEval[i]), stoi(currentCalculation), stoi(tmpNumString));
-    //        }*/
-    //    }
-
-    //    else if (inputEval[i] == '+' || inputEval[i] == '-' || inputEval[i] == '*' || inputEval[i] == '/' || inputEval[i] == '%' && tmpNumString.size() > 0)
-    //    {
-    //        _operator = inputEval[i];
-    //        /*currentCalculation = calculateValue(string(1, inputEval[i]), stoi(currentCalculation), stoi(tmpNumString));*/
-    //        /*tmpNumString = "";*/
-    //    }
+    // next set of instructions after getting rudimentary arithmetic down 
+    // maybe before the below content (starting at loop through expression), we should format the content inside to be easier to work with 
+    // split expression string into a vector<string>? 
+    // 1. find all numbers and make them complete (and then mark them as int, decimal, float, etc)  
+    // 2. 
+    // 
+    // expression queue
+    // => [  expr1  ][ operator ][ expr2 ]...
+    // [ item: { type: number...float, expression1 ( + ... *, "(" ), expression2 ")", etc; value: 5, 55.6, *, %, etc } 
 
 
-    //}
-    /*string calculation = calculateInput();
-    cout << "your calculation is: " << calculation << endl;*/
-
-    initializeCalculator();
+    vector<string> y;
+    cin >> z;
 
 
+    // creating an easily digestible list
+    for (auto& c : z) {
+        cout << c << endl;
+
+        // if c is a number
+        // add to tmp num string
+        // 
+
+        // if c is not a num (an operator)
+        // check what operator 
+
+        // if +, -, /, *
+        // add tmp num to list (maybe do this everytime its an operator?)
+        //      determine if int, decimal, double, etc. 
+        // then add operator to list 
+        // set operator to z (resting operator)
+        // 
+        // (somewhere above) - create priority variable (int) = 0;
+        // this will be used to determine priority of parenthetical operations
+        // 
+        // if (
+        // set operator to p
+        //      p means search for closing parenthesis
+        //  search for closing parenthesis 
+        //      (maybe) set variable openingP = 1, which tracks the amount of opening parenthesis we are currently on
+        //      create for loop that starts at position of opening parenthesis and keeps looping until closing parenthesis is found
+        //      if another opening parenthesis is found, dive into this parentheticalk operation
+        //          evaluate expression in parenthesis
+        //         ... if more parenthesis are found do the same thing over and over 
+        //      
+        //          
+
+
+        
+        // at end, record previous action
+
+
+
+    }
+
+
+
+
+
+
+
+
+    // for reference -- add to notion
     /*int num = 12345;
 
     if (num == 0) {
