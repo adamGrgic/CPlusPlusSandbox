@@ -5,13 +5,90 @@ using namespace std;
 #include <iostream>
 #include <vector>
 
+class Checkpoint {
+    public:
+        int checkpointId;
+        string checkpointName;
+
+        Checkpoint(int id, string checkpointName): checkpointId(id), checkpointName(checkpointName) { }
+};
+
+    /*vector<string> checkpointDescription;*/
+    /*vector<Event> checkpointEvents;*/
+
+class Event {
+    int EventId;
+    string EventName;
+};
+
+bool ValidateUserInput(string input) {
+
+    cout << "You chose " << input << ". Do you accept this choice? Y/n." << endl;
+    string userConfirmation{};
+    cin >> userConfirmation;
+
+    if (userConfirmation == "Y" || userConfirmation == "y") {
+        
+        cout << "You selected yes." << endl;
+        return true;
+    }
+    else if (userConfirmation == "N" || userConfirmation == "n") {
+
+        cout << "You selected no." << endl;
+        return false;
+    }
+    else {
+        
+        cout << "Your answer was not recognized. Please try again." << endl;
+        return ValidateUserInput(input);
+    }
+}
+
+
+// user is at checkpoint 0
+    // each checkpoint has event data associated with it
+    // user selects option 1, triggers event 
+
+    // checkpoint vector 
+    // retrieve checkpoints.. from somewhere
+    // vector<Checkpoint> = { }
+    // 
+    // Checkpoint
+    // 
+    // checkpointId: 
+    // checkpointName: 
+    // checkpointDescription: Vector<string>{}
+    // checkpointEvents: Vector<Event>{}
+    // 
+    // Event
+    // 
+    // EventId:
+    // EventName:
+    // 
+    // 
+    //
+
+bool InitiateCheckpoint(string checkpointName, vector<string>* checkpoints) 
+{
+
+    // given check point name 
+    // find the checkpoint data
+    // -> for now available in memory / declared during main execution
+    // 
+    //  
+
+
+
+    return true;
+}
+
 int main()
 {
 
     // idea: classical dungeons and dragons style game
 
-    vector<string> gameCheckpoints = {
-        "Get out of cell",
+    /*vector<Checkpoint> checkpoints = {
+        {1, "Get out of cell",},
         "Kill Warden",
         "Kill heroes in the heroes wasteland",
         "kill the judge",
@@ -19,7 +96,9 @@ int main()
         "slay cerberus",
         "slay satan's generals",
         "slay satan",
-    };
+    };*/
+    vector<Checkpoint> checkpoints{};
+    checkpoints.push_back(Checkpoint( 1, "Get out of cell"));
 
     int userProgress{ 0 };
 
@@ -33,43 +112,51 @@ int main()
 
     cin >> userName;
 
-    cout << "You have chosen the name " << userName << ". Is that OK?" << endl;
-    cout << "type Y for Yes or N for No." << endl;
+    // function: verify user result
 
+    auto isConfirmed = ValidateUserInput(userName);
 
-    string userConfirm = {};
+    if (isConfirmed) {
+        cout << "DEBUG: User input accepted" << endl;
+    }
+    else {
+        // repeat previous action somehow
+        cout << "DEBUG: User input not accepted" << endl;
+    }
 
-    cin >> userConfirm;
-
-
-    cout << "What is your class? \n";
+    /*cout << "What is your class? \n";
 
     string characterClasses[5] = {"warrior", "mage", "paladin", "warlock", "priest"};
 
-    string userChosenClass = {};
-    cin >> userChosenClass;
+    for (auto& characterClass : characterClasses) {
+        cout << characterClass << endl;
+    }*/
 
-    cout << "you have chosen " << userChosenClass << ". Is that OK? Y/n" << endl;
+    //string userChosenClass = {};
+    //cin >> userChosenClass;
 
-    string userConfirmation{};
+    //cout << "you have chosen " << userChosenClass << ". Is that OK? Y/n" << endl;
 
-    cin >> userConfirmation;
+    //string userConfirmation{};
 
-    if (userConfirmation == "Y" || userConfirmation == "y") {
-        cout << "DEBUG: user confirmed selection." << endl;
-    } else if (userConfirmation == "N" || userConfirmation == "n") {
-        cout << "DEBUG: user did not want this class." << endl;
-    }
-    else {
-        cout << "Your answer didn't match the requested format, defaulting to warrior. " << endl;
+    //cin >> userConfirmation;
 
-        // for now, default to warrior
-        userChosenClass = "warrior";
-    }
+    //if (userConfirmation == "Y" || userConfirmation == "y") {
+    //    cout << "DEBUG: user confirmed selection." << endl;
+    //} else if (userConfirmation == "N" || userConfirmation == "n") {
+    //    cout << "DEBUG: user did not want this class." << endl;
+    //}
+    //else {
+    //    cout << "Your answer didn't match the requested format, defaulting to warrior. " << endl;
 
-    string warriorStory = "You are the warrior. You were forged by the flames of the demon lord kaz'en. Fight on!";
+    //    // for now, default to warrior
+    //    userChosenClass = "warrior";
+    //}
 
-    cout << warriorStory << endl;
+    //string warriorStory = "You are the warrior. You were forged by the flames of the demon lord kaz'en. Fight on!";
+
+    //cout << warriorStory << endl;
+
 
 
     cout << "You wake up in what appears to be a prison cell. You don't remember how you got here." << endl;
@@ -83,7 +170,6 @@ int main()
     cout << "3. Go back to sleep." << endl;
 
     
-
     
     int userChoice{ 0 };
     cin >> userChoice;
@@ -195,7 +281,7 @@ int main()
         cout << "invalid response, please try again.";
     }
 
-    if (userProgress == gameCheckpoints.size()) {
+    if (userProgress == checkpoints.size()) {
         cout << "YOU WIN!" << endl;
     }
 
